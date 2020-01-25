@@ -13,7 +13,7 @@ config :wikiglobe, :db,
   name: "mymongo"
 
 config :cors_plug,
-  origin: ["http://localhost:400"],
+  origin: ["*"],
   max_age: 86400,
   methods: ["GET", "POST"]
 
