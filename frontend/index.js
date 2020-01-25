@@ -12,5 +12,10 @@ function initialize() {
   }
 
 function fetch(year) {
-    var http = new XMLHttpRequest()
+    const url = `http://localhost:4000/api/v1/ex?year=${year}`
+    axios.get(url).then(data => {
+        console.log(data)
+    }).catch(err => {
+        console.log(err)
+    })
 }
