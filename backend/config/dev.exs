@@ -12,6 +12,11 @@ use Mix.Config
 config :wikiglobe, :db,
   name: "mymongo"
 
+config :cors_plug,
+  origin: ["http://localhost:400"],
+  max_age: 86400,
+  methods: ["GET", "POST"]
+
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #
