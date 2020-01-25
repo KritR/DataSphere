@@ -7,6 +7,7 @@ defmodule WikiglobeWeb.WikiDataController do
   action_fallback WikiglobeWeb.FallbackController
 
   def index(conn, %{"year" => year} = params) do
+    
     wikidatas = [%{
       :name => "param was provided",
       :year => year
