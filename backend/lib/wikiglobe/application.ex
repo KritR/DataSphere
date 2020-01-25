@@ -12,7 +12,8 @@ defmodule Wikiglobe.Application do
       # Wikiglobe.Repo,
       # Start the endpoint when the application starts
       WikiglobeWeb.Endpoint,
-      {Mongo, [name: :mongo, url: "mongodb+srv://backend:skarpassword@skarcluster-zb6ru.gcp.mongodb.net/test?retryWrites=true&w=majority", pool: DBConnection.Poolboy]},
+      {Mongo, [name: :mongo, url: "mongodb+srv://backend:skarpassword@skarcluster-zb6ru.gcp.mongodb.net/events?retryWrites=true&w=majority", pool_size: 2]},
+      # DBConnection.Poolboy
       # Starts a worker by calling: Wikiglobe.Worker.start_link(arg)
       # {Wikiglobe.Worker, arg},
     ]
