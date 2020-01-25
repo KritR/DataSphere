@@ -1,13 +1,16 @@
 use Mix.Config
 
 # Configure your database
-config :wikiglobe, Wikiglobe.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "wikiglobe_dev",
-  hostname: "localhost",
-  show_sensitive_data_on_connection_error: true,
-  pool_size: 10
+# config :wikiglobe, Wikiglobe.Repo,
+#   username: "postgres",
+#   password: "postgres",
+#   database: "wikiglobe_dev",
+#   hostname: "localhost",
+#   show_sensitive_data_on_connection_error: true,
+#   pool_size: 10
+
+config :wikiglobe, :db,
+  name: "mymongo"
 
 # For development, we disable any cache and enable
 # debugging and code reloading.

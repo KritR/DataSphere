@@ -20,7 +20,7 @@ defmodule Wikiglobe.MixProject do
   def application do
     [
       mod: {Wikiglobe.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :mongodb, :poolboy]
     ]
   end
 
@@ -36,8 +36,8 @@ defmodule Wikiglobe.MixProject do
       {:phoenix, "~> 1.4.12"},
       {:phoenix_pubsub, "~> 1.1"},
       {:phoenix_ecto, "~> 4.0"},
-      {:ecto_sql, "~> 3.1"},
-      {:postgrex, ">= 0.0.0"},
+      {:mongodb, "~> 0.5.1"},
+      {:poolboy, "~> 1.5"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"}

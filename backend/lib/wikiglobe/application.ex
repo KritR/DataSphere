@@ -9,9 +9,10 @@ defmodule Wikiglobe.Application do
     # List all child processes to be supervised
     children = [
       # Start the Ecto repository
-      Wikiglobe.Repo,
+      # Wikiglobe.Repo,
       # Start the endpoint when the application starts
-      WikiglobeWeb.Endpoint
+      WikiglobeWeb.Endpoint,
+      {Mongo, [name: :mongo, url: "mongodb+srv://backend:skarpassword@skarcluster-zb6ru.gcp.mongodb.net/test?retryWrites=true&w=majority", pool: DBConnection.Poolboy]},
       # Starts a worker by calling: Wikiglobe.Worker.start_link(arg)
       # {Wikiglobe.Worker, arg},
     ]
