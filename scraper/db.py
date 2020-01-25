@@ -27,4 +27,4 @@ if __name__ == '__main__':
     username = sys.argv[1]
     password = sys.argv[2]
 
-    write_to_db("test event", datetime(2009, 11, 12, 12), "elsewhere", auth=(username, password))
+    write_to_db("test event", datetime(2009, 11, 12, 12), auth=(username, password))
