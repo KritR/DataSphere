@@ -2,6 +2,7 @@
 <html>
   <head>
     <script src="https://www.webglearth.com/v2/api.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="./index.js"></script>
     <style>
       html, body{padding: 0; margin: 0;}
@@ -12,5 +13,6 @@
     </head>
     <body onload="initialize()">
       <div id="earth_div"></div>
+      <button style="position: absolute; z-index: 2;"onclick="fetch(2019)">Fetch</button>
   </body>
 </html>
