@@ -5,7 +5,9 @@ defmodule WikiglobeWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", WikiglobeWeb do
+  scope "/api/v1", WikiglobeWeb do
     pipe_through :api
+
+    get "/ex", WikiDataController, :index
   end
 end
