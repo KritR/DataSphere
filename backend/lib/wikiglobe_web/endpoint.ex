@@ -42,4 +42,5 @@ defmodule WikiglobeWeb.Endpoint do
   plug Plug.Head
   plug Plug.Session, @session_options
   plug WikiglobeWeb.Router
+  plug CORSPlug
 end

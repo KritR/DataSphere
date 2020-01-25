@@ -40,6 +40,7 @@ defmodule Wikiglobe.MixProject do
       {:poolboy, "~> 1.5"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
+      {:cors_plug, "~> 2.0"},
       {:plug_cowboy, "~> 2.0"}
     ]
   end
