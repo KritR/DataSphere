@@ -27,4 +27,4 @@ if __name__ == '__main__':
     username = sys.argv[1]
     password = sys.argv[2]
 
-    write_to_db("test event", datetime(2009, 11, 12, 12), auth=(username, password))
+    write_to_db("Boilermake", datetime(2020, 1, 25, 12), lat=40.2, lon=-86.9, desc="the best hackathon evaaa", auth=(username, password))

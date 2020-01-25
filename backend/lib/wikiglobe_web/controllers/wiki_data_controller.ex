@@ -16,10 +16,11 @@ defmodule WikiglobeWeb.WikiDataController do
   end
 
   def index(conn, _params) do
-    wikidatas = [%{
-      :name => "no params provided",
-      :year => "none"
-      }] #Database.list_wikidatas()
+    # wikidatas = [%{
+    #   :name => "no params provided",
+    #   :year => "none"
+    #   }] #Database.list_wikidatas()
+    wikidatas = Mongo.find(:mongo, "events", %{}) |> Enum.to_list()
     render(conn, "index.json", wikidatas: wikidatas)
   end
 

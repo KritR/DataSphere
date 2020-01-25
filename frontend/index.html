@@ -2,6 +2,7 @@
 <html>
   <head>
     <script src="https://www.webglearth.com/v2/api.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="./index.js"></script>
     <style>
       html, body{padding: 0; margin: 0;}
@@ -12,5 +13,43 @@
     </head>
     <body onload="initialize()">
       <div id="earth_div"></div>
+    <style>
+      .slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 25px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+      }
+      
+      .slider:hover {
+        opacity: 1;
+      }
+      
+      .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        background: blue;
+        cursor: pointer;
+      }
+      
+      .slider::-moz-range-thumb {
+        width: 25px;
+        height: 25px;
+        background: blue;
+        cursor: pointer;
+      }
+    </style>
+    <div style="width: 75%; position: absolute; left: 10%; top: 3%;">
+        <input type="range" min="1" max="100" value="100" class="slider" id="myRange" onchange="change_year()">
+        <div style="width: 10%; position: relative; margin: 0 auto; text-align: center">
+            <p id="yearLabel" style="color: white; background-color: darkgray; font-size: 3.5vw; font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">2020</p>
+        </div>
+    </div>
   </body>
 </html>

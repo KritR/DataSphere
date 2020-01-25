@@ -11,6 +11,13 @@ defmodule WikiglobeWeb.WikiDataView do
   end
 
   def render("wiki_data.json", %{wiki_data: wiki_data}) do
-    %{name: wiki_data.name, year: wiki_data.year}
+    %{
+      title: wiki_data["title"], 
+      year: wiki_data["date"], 
+      location: wiki_data["location"],
+      description: wiki_data["description"],
+      url: wiki_data["url"],
+      image: wiki_data["image"]
+    }
   end
 end
