@@ -6,11 +6,20 @@ defmodule WikiglobeWeb.WikiDataController do
 
   action_fallback WikiglobeWeb.FallbackController
 
-  def index(conn, _params) do
-    wikidatas = [%{:name => "goodbye"}] #Database.list_wikidatas()
+  def index(conn, %{"year" => year} = params) do
+    wikidatas = [%{
+      :name => "param was provided",
+      :year => year
+      }] #Database.list_wikidatas()
     render(conn, "index.json", wikidatas: wikidatas)
-    # test = []
-    # json conn, test
+  end
+
+  def index(conn, _params) do
+    wikidatas = [%{
+      :name => "no params provided",
+      :year => "none"
+      }] #Database.list_wikidatas()
+    render(conn, "index.json", wikidatas: wikidatas)
   end
 
   def create(conn, %{"wiki_data" => wiki_data_params}) do
