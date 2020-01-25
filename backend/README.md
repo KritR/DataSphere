@@ -10,10 +10,13 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
 
-## Learn more
+# Docker Usage
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+This is to run the server
+```
+docker run --rm -it -p 4000:4000 -v $PWD:/opt/app bitwalker/alpine-elixir-phoenix mix phx.server
+```
+
+mix phx.server can be substituted for any command
+
+
