@@ -85,7 +85,7 @@ function show_info(title, url, description, img) {
 }
 
 function fetch() {
-    const url = `https://api.datasphere.space/api/v1/ex`
+    const url = `https://api.datasphere.space/api/v1/events`
     axios.get(url, {
         params: {
             year: year,
