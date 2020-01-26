@@ -1,6 +1,4 @@
 import pymongo
-import pprint
-import datetime
 from bs4 import BeautifulSoup
 from newspaper import Article
 # import nltk
