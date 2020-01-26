@@ -10,6 +10,11 @@ use Mix.Config
 config :wikiglobe,
   ecto_repos: [Wikiglobe.Repo]
 
+config :cors_plug,
+  origin: ["*"],
+  max_age: 86400,
+  methods: ["GET", "POST"]
+
 # Configures the endpoint
 config :wikiglobe, WikiglobeWeb.Endpoint,
   url: [host: "localhost"],
