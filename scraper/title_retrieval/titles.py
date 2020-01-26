@@ -4,9 +4,10 @@ from newspaper import Article
 # import nltk
 # nltk.download('punkt')
 from multiprocessing.pool import ThreadPool
+from tqdm import tqdm
 
-def alterObject(id, collection):
-    item = collection.find_one({'_id': id})
+def alterObject(obj_id, collection, i):
+    item = collection.find_one({'_id': obj_id})
     url = item["url"]
     article = Article(url)
     try:
@@ -23,24 +24,26 @@ def alterObject(id, collection):
         newItems = {
             '$set': set_obj
         }
-        collection.update_one({'_id': id}, newItems)
+        collection.update_one({'_id': obj_id}, newItems)
     except:
         return
+    print(i)
 
 
-client = pymongo.MongoClient("mongodb+srv://title_appender:ypLsou4jlqwaaE1I@skarcluster-zb6ru.gcp.mongodb.net/test?retryWrites=true&w=majority")
-database = client.events
-collection = database.events
+if __name__ == '__main__':
+    client = pymongo.MongoClient("mongodb+srv://title_appender:ypLsou4jlqwaaE1I@skarcluster-zb6ru.gcp.mongodb.net/test?retryWrites=true&w=majority")
+    database = client.events
+    collection = database.events
 
-ids = collection.find().distinct('_id')
-num = 12
-tp = ThreadPool(num)
+    ids = collection.find().distinct('_id')
+    num = 20
+    tp = ThreadPool(num)
 
-for id in ids:
-    tp.apply_async(alterObject, (id, collection,))
+    for i, obj_id in enumerate(ids):
+        tp.apply_async(alterObject, (obj_id, collection,i, ))
 
-tp.close()
-tp.join()
+    tp.close()
+    tp.join()
 
 # print(collection.find_one()["_id"])
 
