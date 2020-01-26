@@ -1,5 +1,7 @@
 var earth;
 var curMarkers = [];
+var before = null;
+var myReq;
 
 function initialize() {
     const options = { atmosphere: true, center: [0, 0], zoom: 0 };
@@ -10,6 +12,14 @@ function initialize() {
         attribution: 'NASA'
     }).addTo(earth);
 
+    // Start a simple rotation animation
+    myReq = requestAnimationFrame(function animate(now) {
+        var c = earth.getPosition();
+        var elapsed = before ? now - before : 0;
+        before = now;
+        earth.setCenter([c[0], c[1] + 0.8*(elapsed/30)]);
+        myReq = requestAnimationFrame(animate);
+    });
 }
 
 var interval = 0;
@@ -28,12 +38,17 @@ function fade_out() {
 
 function close_splash() {
     interval = setInterval(fade_out, 20);
+    window.cancelAnimationFrame(myReq)
 }
 
+const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"]
+
 function change_year_label() {
-    yearLabel = document.getElementById("yearLabel")
-    slider = document.getElementById("myRange")
-    yearLabel.innerHTML = parseInt(slider.value) + 1920
+    yearLabel = document.getElementById("yearLabel");
+    slider = document.getElementById("myRange");
+    let year = 2010 + Math.floor(parseInt(slider.value) / 12);
+    let month = months[parseInt(slider.value) % 12];
+    yearLabel.innerHTML = month + " " + year;
 }
 
 function fetch_markers() {
