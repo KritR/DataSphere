@@ -17,7 +17,7 @@ function initialize() {
         var c = earth.getPosition();
         var elapsed = before ? now - before : 0;
         before = now;
-        earth.setCenter([c[0], c[1] + 0.8*(elapsed/30)]);
+        earth.setCenter([c[0], c[1] + 0.8 * (elapsed / 30)]);
         myReq = requestAnimationFrame(animate);
     });
 }
@@ -71,4 +71,9 @@ function fetch(year) {
     }).catch(err => {
         console.log(err)
     })
+}
+
+var data = "news";
+function handleDataChange(radio) {
+    data = radio.value;
 }
