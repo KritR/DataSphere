@@ -3,8 +3,8 @@ var curMarkers = [];
 var before = null;
 var myReq;
 
-var year;
-var month;
+var year = 2020;
+var month = 1;
 
 function initialize() {
     const options = { atmosphere: true, center: [0, 0], zoom: 0 };
@@ -41,7 +41,8 @@ function fade_out() {
 
 function close_splash() {
     interval = setInterval(fade_out, 20);
-    window.cancelAnimationFrame(myReq)
+    window.cancelAnimationFrame(myReq);
+    fetch_markers();
 }
 
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"]
@@ -74,6 +75,15 @@ function fetch_markers() {
     fetch()
 }
 
+function show_info(title, url, description, img) {
+    document.querySelector("#info_panel").style.opacity = 1;
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.querySelector("#info_title").innerHTML = title;
+    document.querySelector("#info_url").innerHTML = "<a href='" + url + "'>" + url + "</a>";
+    document.querySelector("#info_description").innerHTML = description;
+    document.querySelector("#info_img").src = img
+}
+
 function fetch() {
     const url = `https://api.datasphere.space/api/v1/ex`
     axios.get(url, {
@@ -85,11 +95,15 @@ function fetch() {
         console.log(res.data.data)
         for (const event of res.data.data) {
             var marker = WE.marker([event.location.lat, event.location.lon]).addTo(earth);
-            marker.bindPopup(`<b>${event.title}</b><br>${event.description}<br/><span style='font-size:10px;color:#999'></span>`, { maxWidth: 150, closeButton: true });
-            curMarkers.push(marker)
+            marker.element.addEventListener("click", function () {
+                show_info(event.title, event.url, event.description, event.image);
+            });
+            //marker.
+            //marker.bindPopup(`<b>${event.title}</b><br>${event.description}<br/><span style='font-size:10px;color:#999'></span>`, { maxWidth: 150, closeButton: true });
+            curMarkers.push(marker);
         }
     }).catch(err => {
-        console.log(err)
+        console.log(err);
     })
 }
 

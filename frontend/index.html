@@ -21,14 +21,16 @@
       position: absolute !important;
     }
   </style>
-  <title>WikiGlobe</title>
+  <title>DataSphere</title>
 </head>
 
 <body onload="initialize()">
   <div id="earth_div" style="z-index: -1"></div>
   <div id="splash">
-    <h1 style="position: relative; top: 25%">WikiGlobe</h1>
-    <h2 style="position: relative; top: 28%">A world full of history</h2>
+    <h1 style="position: relative; top: 25%">DataSphere</h1>
+    <h2 style="font-weight: normal; position: relative; top: 28%">&middot;&nbsp;&nbsp;A world full of
+      history&nbsp;&middot;
+    </h2>
     <button style="position: relative; top: 40vh" onclick="close_splash()">></button>
   </div>
   <style>
@@ -38,11 +40,11 @@
       margin: 0;
     }
 
-    h1 {
+    #splash h1 {
       font-size: 6em;
     }
 
-    h2 {
+    #splash h2 {
       font-size: 3em;
     }
 
@@ -155,7 +157,7 @@
     <div style="width: 14em; position: relative;">
       <div>
         <p id="yearLabel"
-          style="margin: 10px 0px; color: white; text-align: left; padding: 0.1em 0.5em; font-size: 2.5em; border-left: 1px solid white; border-top: 1px solid white; border-top-left-radius: 6px;">
+          style="margin: 10px 0px; color: white; text-align: left; padding: 0.2em 0.6em; font-size: 1.75em; border-left: 1px solid white; border-top: 1px solid white; border-top-left-radius: 6px;">
           Jan 2020</p>
       </div>
     </div>
@@ -168,6 +170,18 @@
       <input type="radio" name="data" value="earthquakes" onclick="handleDataChange(this);"><span>Earthquakes</span>
     </label>
   </div>
+  <div id="info_panel"
+    style="opacity: 0; position: absolute; right: 1%; top: 15%;border-top: 1px solid white;border-right: 1px solid white;border-bottom:1px solid white;border-radius: 6px;">
+    <h2 id="info_title" style="margin:20px 20px 0px 20px;max-width: 12em;"></h2>
+    <p id="info_url"
+      style="font-style:italic;margin:6px 20px;max-width: 24em;overflow:hidden;white-space: nowrap;text-overflow: ellipsis;">
+    </p>
+    <hr style="margin:20px">
+    <p id="info_description" style="margin:20px;max-width: 24em;max-height:13.2em;overflow:hidden">
+    </p>
+    <img id="info_img" height="140" style="display:block; margin: 0 auto 20px auto">
+  </div>
+
 </body>
 
 </html>
