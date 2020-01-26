@@ -47,12 +47,23 @@ function close_splash() {
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"]
 
 function change_year_label() {
-    yearLabel = document.getElementById("yearLabel");
-    slider = document.getElementById("myRange");
-    year = 2010 + Math.floor(parseInt(slider.value) / 12);
-    month = parseInt(slider.value) % 12 + 1;
-    let month_string = months[month - 1];
-    yearLabel.innerHTML = month_string + " " + year;
+    if (data == "news") {
+        yearLabel = document.getElementById("yearLabel");
+        slider = document.getElementById("myRange");
+        year = 2010 + Math.floor(parseInt(slider.value) / 12);
+        month = parseInt(slider.value) % 12 + 1;
+        let month_string = months[month - 1];
+        yearLabel.innerHTML = month_string + " " + year;
+    } else if (data == "earthquakes") {
+        yearLabel = document.getElementById("yearLabel");
+        slider = document.getElementById("myRange");
+        year = -500 + 100 * Math.floor(parseInt(slider.value) / 4.8);
+        if (year < 0) {
+            yearLabel.innerHTML = -year + "'s BCE";
+        } else {
+            yearLabel.innerHTML = year + "'s CE";
+        }
+    }
 }
 
 function fetch_markers() {
@@ -66,10 +77,10 @@ function fetch_markers() {
 function fetch() {
     const url = `http://localhost:4000/api/v1/ex`
     axios.get(url, {
-      params: {
-        year: year,
-        month: month
-      }
+        params: {
+            year: year,
+            month: month
+        }
     }).then(res => {
         console.log(res.data.data)
         for (const event of res.data.data) {
@@ -85,4 +96,5 @@ function fetch() {
 var data = "news";
 function handleDataChange(radio) {
     data = radio.value;
+    change_year_label();
 }
