@@ -152,8 +152,8 @@
     }
   </style>
   <div style="width: 70%; position: absolute; left: 15%; top: 3%;">
-    <input type="range" min="0" max="120" value="120" class="slider" id="myRange" onchange="fetch_markers()"
-      oninput="change_year_label()">
+    <input type="range" min="0" max="120" value="120" class="slider" id="myRange"
+      oninput="change_year_label(); fetch_markers();">
     <div style="width: 14em; position: relative;">
       <div>
         <p id="yearLabel"
