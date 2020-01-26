@@ -3,8 +3,8 @@ var curMarkers = [];
 var before = null;
 var myReq;
 
-var year;
-var month;
+var year = 2020;
+var month = 1;
 
 function initialize() {
     const options = { atmosphere: true, center: [0, 0], zoom: 0 };
