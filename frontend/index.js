@@ -75,7 +75,7 @@ function fetch_markers() {
 }
 
 function fetch() {
-    const url = `http://localhost:4000/api/v1/ex`
+    const url = `http://api.datasphere.space/api/v1/ex`
     axios.get(url, {
         params: {
             year: year,
