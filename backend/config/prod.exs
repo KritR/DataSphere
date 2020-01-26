@@ -13,6 +13,12 @@ config :wikiglobe, WikiglobeWeb.Endpoint,
   url: [host: "example.com", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
+config :cors_plug,
+#origin: ["*.datasphere.space, datasphere.space"], 
+  origin: ["*"],
+  max_age: 86400,
+  methods: ["GET", "POST"]
+
 # Do not print debug messages in production
 config :logger, level: :info
 
