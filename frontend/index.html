@@ -28,7 +28,7 @@
   <div id="earth_div" style="z-index: -1"></div>
   <div id="splash">
     <h1 style="position: relative; top: 25%">WikiGlobe</h1>
-    <p style="position: relative; top: 28%">A world full of history</p>
+    <h2 style="position: relative; top: 28%">A world full of history</h2>
     <button style="position: relative; top: 40vh" onclick="close_splash()">></button>
   </div>
   <style>
@@ -42,7 +42,7 @@
       font-size: 6em;
     }
 
-    p {
+    h2 {
       font-size: 3em;
     }
 
@@ -108,6 +108,10 @@
       cursor: pointer;
       border-radius: 12px;
     }
+
+    input {
+      margin: 6px;
+    }
   </style>
   <div style="width: 70%; position: absolute; left: 15%; top: 3%;">
     <input type="range" min="0" max="120" value="120" class="slider" id="myRange" onchange="fetch_markers()"
@@ -119,6 +123,10 @@
           Jan 2020</p>
       </div>
     </div>
+  </div>
+  <div style="width: 70%; position: absolute; left: 15%; bottom: 3%;">
+    <input type="radio" name="data" value="news" checked="checked" onclick="handleDataChange(this);">News<br>
+    <input type="radio" name="data" value="earthquakes" onclick="handleDataChange(this);">Earthquakes<br>
   </div>
 </body>
 
