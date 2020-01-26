@@ -30,10 +30,14 @@ function close_splash() {
     interval = setInterval(fade_out, 20);
 }
 
+const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"]
+
 function change_year_label() {
-    yearLabel = document.getElementById("yearLabel")
-    slider = document.getElementById("myRange")
-    yearLabel.innerHTML = parseInt(slider.value) + 1920
+    yearLabel = document.getElementById("yearLabel");
+    slider = document.getElementById("myRange");
+    let year = 2010 + Math.floor(parseInt(slider.value) / 12);
+    let month = months[parseInt(slider.value) % 12];
+    yearLabel.innerHTML = month + " " + year;
 }
 
 function fetch_markers() {
