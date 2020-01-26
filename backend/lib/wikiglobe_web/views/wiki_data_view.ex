@@ -2,22 +2,40 @@ defmodule WikiglobeWeb.WikiDataView do
   use WikiglobeWeb, :view
   alias WikiglobeWeb.WikiDataView
 
-  def render("index.json", %{wikidatas: wikidatas}) do
-    %{data: render_many(wikidatas, WikiDataView, "wiki_data.json")}
+  def render("index.json", %{events: events}) do
+    %{data: render_many(events, WikiDataView, "event.json")}
   end
 
-  def render("show.json", %{wiki_data: wiki_data}) do
-    %{data: render_one(wiki_data, WikiDataView, "wiki_data.json")}
+  def render("show.json", %{events: event}) do
+    %{data: render_one(event, WikiDataView, "event.json")}
   end
 
-  def render("wiki_data.json", %{wiki_data: wiki_data}) do
+
+  def render("event.json", %{wiki_data: event}) do
     %{
-      title: wiki_data["title"], 
-      year: wiki_data["date"], 
-      location: wiki_data["location"],
-      description: wiki_data["description"],
-      url: wiki_data["url"],
-      image: wiki_data["image"]
+      title: event["title"], 
+      year: event["date"], 
+      location: event["location"],
+      description: event["description"],
+      url: event["url"],
+      image: event["image"]
+    }
+  end
+
+  def render("index.json", %{earthquakes: earthquakes}) do
+    %{data: render_many(earthquakes, WikiDataView, "earthquake.json")}
+  end
+
+  def render("show.json", %{earthquakes: earthquake}) do
+    %{data: render_one(earthquake, WikiDataView, "earthquake.json")}
+  end
+
+  def render("earthquake.json", %{wiki_data: earthquakes}) do
+    %{
+      location_name: earthquakes["location_name"], 
+      year: earthquakes["year"], 
+      location: earthquakes["location"],
+      eq_primary: earthquakes["eq_primary"],
     }
   end
 end
