@@ -6,23 +6,22 @@ defmodule WikiglobeWeb.WikiDataController do
 
   action_fallback WikiglobeWeb.FallbackController
 
-  def index(conn, %{"year" => year} = params) do
-    
-    wikidatas = [%{
-      :name => "param was provided",
-      :year => year
-      }] #Database.list_wikidatas()
+  def index(conn, %{"year" => year, "month" => month} = params) do
+    month = month |> String.pad_leading(2, "0")
+    # TODO FETCH WITHIN RANGE OF DATE
+    {:ok, datetime, _} = DateTime.from_iso8601("#{year}-#{month}-01 00:00:00Z")
+    wikidatas = Mongo.find(:mongo, "events", %{date: datetime}) |> Enum.to_list()
     render(conn, "index.json", wikidatas: wikidatas)
   end
 
-  def index(conn, _params) do
+  # def index(conn, _params) do
     # wikidatas = [%{
     #   :name => "no params provided",
     #   :year => "none"
     #   }] #Database.list_wikidatas()
-    wikidatas = Mongo.find(:mongo, "events", %{}) |> Enum.to_list()
-    render(conn, "index.json", wikidatas: wikidatas)
-  end
+  #   wikidatas = Mongo.find(:mongo, "events", %{}) |> Enum.to_list()
+  #   render(conn, "index.json", wikidatas: wikidatas)
+  # end
 
   def create(conn, %{"wiki_data" => wiki_data_params}) do
     with {:ok, %WikiData{} = wiki_data} <- Database.create_wiki_data(wiki_data_params) do
