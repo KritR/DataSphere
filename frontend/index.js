@@ -12,6 +12,24 @@ function initialize() {
 
 }
 
+var interval = 0;
+
+function fade_out() {
+    const splash = document.querySelector('#splash');
+    opacity = Number(window.getComputedStyle(splash).getPropertyValue("opacity"));
+    if (opacity > 0) {
+        opacity = opacity - 1.0;
+        splash.style.opacity = opacity;
+    } else {
+        clearInterval(interval);
+        splash.parentNode.removeChild(splash);
+    }
+}
+
+function close_splash() {
+    interval = setInterval(fade_out, 20);
+}
+
 function change_year_label() {
     yearLabel = document.getElementById("yearLabel")
     slider = document.getElementById("myRange")
