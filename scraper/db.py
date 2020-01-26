@@ -1,6 +1,7 @@
 import pymongo
 import dateparser
 import sys
+import datetime
 
 # python -m pip install pymongo dnspython
 
@@ -27,4 +28,4 @@ if __name__ == '__main__':
     username = sys.argv[1]
     password = sys.argv[2]
 
-    write_to_db("Boilermake", datetime(2020, 1, 25, 12), lat=40.2, lon=-86.9, desc="the best hackathon evaaa", auth=(username, password))
+    write_to_db("Boilermake", datetime.datetime(2018, 1, 25, 12), lat=40.2, lon=-86.9, desc="the best hackathon evaaa", auth=(username, password))
