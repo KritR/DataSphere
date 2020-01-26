@@ -3,6 +3,9 @@ var curMarkers = [];
 var before = null;
 var myReq;
 
+var year;
+var month;
+
 function initialize() {
     const options = { atmosphere: true, center: [0, 0], zoom: 0 };
     earth = new WE.map('earth_div', options);
@@ -46,9 +49,10 @@ const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept"
 function change_year_label() {
     yearLabel = document.getElementById("yearLabel");
     slider = document.getElementById("myRange");
-    let year = 2010 + Math.floor(parseInt(slider.value) / 12);
-    let month = months[parseInt(slider.value) % 12];
-    yearLabel.innerHTML = month + " " + year;
+    year = 2010 + Math.floor(parseInt(slider.value) / 12);
+    month = parseInt(slider.value) % 12 + 1;
+    let month_string = months[month - 1];
+    yearLabel.innerHTML = month_string + " " + year;
 }
 
 function fetch_markers() {
@@ -59,9 +63,14 @@ function fetch_markers() {
     fetch()
 }
 
-function fetch(year) {
+function fetch() {
     const url = `http://localhost:4000/api/v1/ex`
-    axios.get(url).then(res => {
+    axios.get(url, {
+      params: {
+        year: year,
+        month: month
+      }
+    }).then(res => {
         console.log(res.data.data)
         for (const event of res.data.data) {
             var marker = WE.marker([event.location.lat, event.location.lon]).addTo(earth);
