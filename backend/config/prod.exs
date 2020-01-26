@@ -14,7 +14,7 @@ config :wikiglobe, WikiglobeWeb.Endpoint,
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 config :cors_plug,
-  origin: ["*.datasphere.space, datasphere.space"], 
+  origin: ["http://datasphere.space, http://www.datasphere.space"], 
 # TODO
 # origin: ["*"],
   max_age: 86400,
