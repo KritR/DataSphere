@@ -11,7 +11,7 @@ config :wikiglobe,
   ecto_repos: [Wikiglobe.Repo]
 
 config :cors_plug,
-  origin: ["*"],
+  origin: ["http://datasphere.space"],
   max_age: 86400,
   methods: ["GET", "POST"]
 
