@@ -15,6 +15,7 @@ config :wikiglobe, WikiglobeWeb.Endpoint,
 
 config :cors_plug,
 #origin: ["*.datasphere.space, datasphere.space"], 
+# TODO
   origin: ["*"],
   max_age: 86400,
   methods: ["GET", "POST"]
