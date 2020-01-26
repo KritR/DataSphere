@@ -6,6 +6,8 @@ var myReq;
 var year = 2020;
 var month = 1;
 
+var base_url = "https://api.datasphere.space/api/v1"
+
 function initialize() {
     const options = { atmosphere: true, center: [0, 0], zoom: 0 };
     earth = new WE.map('earth_div', options);
@@ -55,6 +57,7 @@ function change_year_label() {
         month = parseInt(slider.value) % 12 + 1;
         let month_string = months[month - 1];
         yearLabel.innerHTML = month_string + " " + year;
+        fetch_markers()
     } else if (data == "earthquakes") {
         yearLabel = document.getElementById("yearLabel");
         slider = document.getElementById("myRange");
@@ -64,6 +67,7 @@ function change_year_label() {
         } else {
             yearLabel.innerHTML = year + "'s CE";
         }
+        fetch_markers()
     }
 }
 
@@ -72,7 +76,7 @@ function fetch_markers() {
         marker.detach()
     }
     curMarkers = []
-    fetch()
+    fetch(data)
 }
 
 function show_info(title, url, description, img) {
@@ -81,30 +85,56 @@ function show_info(title, url, description, img) {
     document.querySelector("#info_title").innerHTML = title;
     document.querySelector("#info_url").innerHTML = "<a href='" + url + "'>" + url + "</a>";
     document.querySelector("#info_description").innerHTML = description;
-    document.querySelector("#info_img").src = img
+    if (img) {
+        document.querySelector("#info_img").src = img
+    }
+    else {
+        document.querySelector("#info_img").src = ""
+    }
+    
 }
 
 function fetch() {
-    const url = `https://api.datasphere.space/api/v1/events`
-    axios.get(url, {
-        params: {
-            year: year,
-            month: month
-        }
-    }).then(res => {
-        console.log(res.data.data)
-        for (const event of res.data.data) {
-            var marker = WE.marker([event.location.lat, event.location.lon]).addTo(earth);
-            marker.element.addEventListener("click", function () {
-                show_info(event.title, event.url, event.description, event.image);
-            });
-            //marker.
-            //marker.bindPopup(`<b>${event.title}</b><br>${event.description}<br/><span style='font-size:10px;color:#999'></span>`, { maxWidth: 150, closeButton: true });
-            curMarkers.push(marker);
-        }
-    }).catch(err => {
-        console.log(err);
-    })
+    var url;
+    if (data == "news") {
+        url = base_url + `/events`
+        axios.get(url, {
+            params: {
+                year: year,
+                month: month
+            }
+        }).then(res => {
+            console.log(res.data.data)
+            for (const event of res.data.data) {
+                var marker = WE.marker([event.location.lat, event.location.lon]).addTo(earth);
+                marker.element.addEventListener("click", function () {
+                    show_info(event.title, event.url, event.description, event.image);
+                });
+                curMarkers.push(marker);
+            }
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+    else {
+        url = base_url + `/earthquakes`
+        axios.get(url, {
+            params: {
+                century_start: year
+            }
+        }).then(res => {
+            console.log(res.data.data)
+            for (const event of res.data.data) {
+                var marker = WE.marker([event.location.latitude, event.location.longitude]).addTo(earth);
+                marker.element.addEventListener("click", function () {
+                    show_info(event.location_name, "", event.eq_primary.toString(), null);
+                });
+                curMarkers.push(marker);
+            }
+        }).catch(err => {
+            console.log(err);
+        })
+    }
 }
 
 var data = "news";
