@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <script src="https://www.webglearth.com/v2/api.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="./index.js"></script>
+  <style>
+    html,
+    body {
+      padding: 0;
+      margin: 0;
+    }
+
+    #earth_div {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: #000;
+      position: absolute !important;
+    }
+  </style>
+  <title>WikiGlobe</title>
+</head>
+
+<body onload="initialize()">
+  <div id="earth_div" style="z-index: -1"></div>
+  <div id="splash">
+    <h1 style="position: relative; top: 25%">WikiGlobe</h1>
+    <p style="position: relative; top: 28%">A world full of history</p>
+    <button style="position: relative; top: 40vh" onclick="close_splash()">></button>
+  </div>
+  <style>
+    * {
+      font-family: 'Proxima Nova', 'Open Sans', 'Gill Sans MT', 'Gill Sans', Corbel, Arial, sans-serif;
+      color: white;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 6em;
+    }
+
+    p {
+      font-size: 3em;
+    }
+
+    button {
+      width: 100px;
+      height: 100px;
+      background-color: transparent;
+      border-radius: 50px;
+      border: 3px solid white;
+      font-size: 2em;
+      -webkit-transition: .3s;
+      transition: .3s;
+    }
+
+    button:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    #splash {
+      position: absolute;
+      text-align: center;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: rgba(0, 47, 111, 0.8);
+      z-index: 1;
+      -webkit-transition: .3s;
+      transition: .3s;
+    }
+
+    .slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 12px;
+      background: #202020;
+      border: 1px solid #aaa;
+      outline: none;
+      opacity: 0.7;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+      border-radius: 6px;
+    }
+
+    .slider:hover {
+      opacity: 1;
+    }
+
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 24px;
+      height: 24px;
+      background: white;
+      cursor: pointer;
+      border-radius: 12px;
+    }
+
+    .slider::-moz-range-thumb {
+      width: 24px;
+      height: 24px;
+      background: white;
+      cursor: pointer;
+      border-radius: 12px;
+    }
+  </style>
+  <div style="width: 70%; position: absolute; left: 15%; top: 3%;">
+    <input type="range" min="0" max="120" value="120" class="slider" id="myRange" onchange="fetch_markers()"
+      oninput="change_year_label()">
+    <div style="width: 14em; position: relative;">
+      <div>
+        <p id="yearLabel"
+          style="margin: 10px 0px; color: white; text-align: left; padding: 0.1em 0.5em; font-size: 2.5em; border-left: 1px solid white; border-top: 1px solid white; border-top-left-radius: 6px;">
+          Jan 2020</p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
