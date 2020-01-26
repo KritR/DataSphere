@@ -14,9 +14,9 @@ config :wikiglobe, WikiglobeWeb.Endpoint,
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 config :cors_plug,
-#origin: ["*.datasphere.space, datasphere.space"], 
+  origin: ["*.datasphere.space, datasphere.space"], 
 # TODO
-  origin: ["*"],
+# origin: ["*"],
   max_age: 86400,
   methods: ["GET", "POST"]
 
