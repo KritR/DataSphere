@@ -127,7 +127,8 @@ function fetch() {
             for (const event of res.data.data) {
                 var marker = WE.marker([event.location.latitude, event.location.longitude]).addTo(earth);
                 marker.element.addEventListener("click", function () {
-                    show_info(event.location_name, "", event.eq_primary.toString(), null);
+                    const description = "Magnitude: " + event.eq_primary.toString() + "<br>" + "Year: " + event.year.toString();
+                    show_info(event.location_name, "" , description, null);
                 });
                 curMarkers.push(marker);
             }
