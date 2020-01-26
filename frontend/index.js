@@ -3,10 +3,13 @@ var curMarkers = [];
 var before = null;
 var myReq;
 
+var year;
+var month;
+
 function initialize() {
     const options = { atmosphere: true, center: [0, 0], zoom: 0 };
     earth = new WE.map('earth_div', options);
-    WE.tileLayer('http://tileserver.maptiler.com/nasa/{z}/{x}/{y}.jpg', {
+    WE.tileLayer('https://tileserver.maptiler.com/nasa/{z}/{x}/{y}.jpg', {
         minZoom: 0,
         maxZoom: 5,
         attribution: 'NASA'
@@ -17,7 +20,7 @@ function initialize() {
         var c = earth.getPosition();
         var elapsed = before ? now - before : 0;
         before = now;
-        earth.setCenter([c[0], c[1] + 0.8*(elapsed/30)]);
+        earth.setCenter([c[0], c[1] + 0.8 * (elapsed / 30)]);
         myReq = requestAnimationFrame(animate);
     });
 }
@@ -44,11 +47,23 @@ function close_splash() {
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"]
 
 function change_year_label() {
-    yearLabel = document.getElementById("yearLabel");
-    slider = document.getElementById("myRange");
-    let year = 2010 + Math.floor(parseInt(slider.value) / 12);
-    let month = months[parseInt(slider.value) % 12];
-    yearLabel.innerHTML = month + " " + year;
+    if (data == "news") {
+        yearLabel = document.getElementById("yearLabel");
+        slider = document.getElementById("myRange");
+        year = 2010 + Math.floor(parseInt(slider.value) / 12);
+        month = parseInt(slider.value) % 12 + 1;
+        let month_string = months[month - 1];
+        yearLabel.innerHTML = month_string + " " + year;
+    } else if (data == "earthquakes") {
+        yearLabel = document.getElementById("yearLabel");
+        slider = document.getElementById("myRange");
+        year = -500 + 100 * Math.floor(parseInt(slider.value) / 4.8);
+        if (year < 0) {
+            yearLabel.innerHTML = -year + "'s BCE";
+        } else {
+            yearLabel.innerHTML = year + "'s CE";
+        }
+    }
 }
 
 function fetch_markers() {
@@ -59,9 +74,14 @@ function fetch_markers() {
     fetch()
 }
 
-function fetch(year) {
-    const url = `http://localhost:4000/api/v1/ex`
-    axios.get(url).then(res => {
+function fetch() {
+    const url = `https://api.datasphere.space/api/v1/ex`
+    axios.get(url, {
+        params: {
+            year: year,
+            month: month
+        }
+    }).then(res => {
         console.log(res.data.data)
         for (const event of res.data.data) {
             var marker = WE.marker([event.location.lat, event.location.lon]).addTo(earth);
@@ -71,4 +91,10 @@ function fetch(year) {
     }).catch(err => {
         console.log(err)
     })
+}
+
+var data = "news";
+function handleDataChange(radio) {
+    data = radio.value;
+    change_year_label();
 }
