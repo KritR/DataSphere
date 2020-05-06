@@ -25,9 +25,8 @@ secret_key_base =
 
 config :wikiglobe, WikiglobeWeb.Endpoint,
   http: [
-   #port: String.to_integer(System.get_env("PORT") || "80"),
+   port: String.to_integer(System.get_env("PORT") || "80"),
    #transport_options: [socket_opts: [:inet6]]
-   port: 80
   ],
   secret_key_base: secret_key_base
 

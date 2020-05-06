@@ -1,0 +1,23 @@
+version: "3"
+services:
+  datasphere-backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile-Prod
+    image: datasphere-backend:prod
+    env_file:
+      - ./.secret.env
+    user: "1000001"
+  revproxy:
+    image: caddy:2.0.0
+    ports:
+      - "443:443"
+      - "80:80"
+    volumes:
+      - caddy_data:/data
+    depends_on:
+      - datasphere-backend
+    command: caddy reverse-proxy --to datasphere-backend:4000
+
+volumes:
+  caddy_data:

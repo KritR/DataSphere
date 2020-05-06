@@ -1,0 +1,15 @@
+FROM bitwalker/alpine-elixir-phoenix:latest
+
+EXPOSE 4000
+ENV PORT=4000 
+
+ADD mix.exs mix.lock ./
+RUN mix do deps.get, deps.compile
+
+ADD . .
+
+RUN mix do compile
+
+USER default
+
+CMD ["mix", "phx.server"]

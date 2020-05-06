@@ -1,0 +1,18 @@
+FROM bitwalker/alpine-elixir-phoenix:latest
+
+EXPOSE 4000
+ENV PORT=4000 MIX_ENV=prod 
+
+ADD mix.exs mix.lock ./
+RUN mix do deps.get --only prod, deps.compile
+
+ADD . .
+
+# this is just to make compilation happen. not actual key
+ENV SECRET_KEY_BASE=UbkEcqaApfHNvMviKHzDeyU4pGAy/59M0Z/ZL9sA7Nd+R3OiTNM0klK3CPll+LSi
+
+RUN mix do compile
+
+USER default
+
+CMD ["mix", "phx.server"]
