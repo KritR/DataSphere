@@ -8,6 +8,10 @@ var month = 1;
 
 var base_url = "https://api.datasphere.space/api/v1"
 
+function enableDebug() {
+    base_url = "https://localhost/api/v1"
+}
+
 function initialize() {
     const options = { atmosphere: true, center: [0, 0], zoom: 0 };
     earth = new WE.map('earth_div', options);

@@ -4,18 +4,23 @@ services:
     build: 
       context: ./backend
       dockerfile: Dockerfile-Dev
+    volumes:
+      - ./backend:/opt/app
     image: datasphere-backend:dev
     user: "1000001"
   revproxy:
-    image: caddy:2.0.0
+    build: 
+      context: ./caddy
+      dockerfile: Dockerfile-Dev
     ports:
       - "443:443"
       - "80:80"
+      - "4000:4000"
     volumes:
+      - ./frontend:/usr/share/caddy
       - caddy_data:/data
     depends_on:
       - datasphere-backend
-    command: caddy reverse-proxy --to datasphere-backend:4000
 
 volumes:
   caddy_data:

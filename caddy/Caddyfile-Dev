@@ -1,0 +1,7 @@
+
+localhost 
+
+root * /usr/share/caddy
+file_server
+
+reverse_proxy /api/* datasphere-backend:4000
