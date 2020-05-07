@@ -1,213 +1,93 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
+  <head>
+    <script src="https://www.webglearth.com/v2/api.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./index.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <title>DataSphere</title>
+  </head>
 
-<head>
-  <script src="https://www.webglearth.com/v2/api.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="./index.js"></script>
-  <style>
-    html,
-    body {
-      padding: 0;
-      margin: 0;
-    }
-
-    #earth_div {
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      background-color: #000;
-      position: absolute !important;
-    }
-    .we-pm-icon {
-      width: 10px !important;
-      margin-left: -5px;
-      margin-top: -5px;
-      background-image: none;
-      height: 10px !important;
-      border-radius: 50%;
-      background-color:
-      rgba(36, 125, 204, 0.36);
-      border-color: rgba(1,1,1,0);
-      border: solid;
-      margin: 10px;
-      transition: transform 0.7s;
-    }
-
-    .we-pm-icon:hover{
-      background-color: rgba(36, 125, 204, 0.8);
-      transition: background-color 0.7s;
-      transform: scale(1.5);
-    }
-    #info_panel {
-      min-width: 20em;
-    }
-  </style>
-  <title>DataSphere</title>
-</head>
-
-<body onload="initialize()">
-  <div id="earth_div" style="z-index: -1"></div>
-  <div id="splash">
-    <h1 style="position: relative; top: 25%">DataSphere</h1>
-    <h2 style="font-weight: normal; position: relative; top: 28%">&middot;&nbsp;&nbsp;A world full of
-      history&nbsp;&middot;
-    </h2>
-    <h3 style="font-weight: normal; position: relative; top: 58%;font-style: italic;">
-      Explore 10,000+ recorded events
-    </h3>
-    <button style="position: relative; top: 40vh" onclick="close_splash()">></button>
-  </div>
-  <style>
-    * {
-      font-family: 'Proxima Nova', 'Open Sans', 'Gill Sans MT', 'Gill Sans', Corbel, Arial, sans-serif;
-      color: white;
-      margin: 0;
-    }
-
-    #splash h1 {
-      font-size: 6em;
-    }
-
-    #splash h2 {
-      font-size: 3em;
-    }
-
-    button {
-      width: 100px;
-      height: 100px;
-      background-color: transparent;
-      border-radius: 50px;
-      border: 3px solid white;
-      font-size: 2em;
-      -webkit-transition: .3s;
-      transition: .3s;
-    }
-
-    button:hover {
-      background-color: rgba(255, 255, 255, 0.3);
-    }
-
-    #splash {
-      position: absolute;
-      text-align: center;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      background-color: rgba(0, 47, 111, 0.8);
-      z-index: 1;
-      -webkit-transition: .3s;
-      transition: .3s;
-    }
-
-    .slider {
-      -webkit-appearance: none;
-      width: 100%;
-      height: 12px;
-      background: #202020;
-      border: 1px solid white;
-      outline: none;
-      opacity: 0.7;
-      -webkit-transition: .2s;
-      transition: opacity .2s;
-      border-radius: 6px;
-    }
-
-    .slider:hover {
-      opacity: 1;
-    }
-
-    .slider::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 24px;
-      height: 24px;
-      background: white;
-      cursor: pointer;
-      border-radius: 12px;
-    }
-
-    .slider::-moz-range-thumb {
-      width: 24px;
-      height: 24px;
-      background: white;
-      cursor: pointer;
-      border-radius: 12px;
-    }
-
-    [type="radio"] {
-      border: 0;
-      clip: rect(0 0 0 0);
-      height: 1px;
-      margin: -1px;
-      overflow: hidden;
-      padding: 0;
-      position: absolute;
-      width: 1px;
-    }
-
-    label {
-      display: block;
-      cursor: pointer;
-      line-height: 1.75;
-      font-size: 1.25em;
-    }
-
-    [type="radio"]+span {
-      display: block;
-    }
-
-    [type="radio"]+span:before {
-      content: '';
-      display: inline-block;
-      width: 0.75em;
-      height: 0.75em;
-      vertical-align: -0.1em;
-      border-radius: 1em;
-      border: 1px solid #fff;
-      box-shadow: 0 0 0 0.15em #000;
-      margin-right: 0.5em;
-      transition: 0.5s ease all;
-    }
-
-    [type="radio"]:checked+span:before {
-      background: white;
-      box-shadow: 0 0 0 0.15em #000 inset;
-    }
-  </style>
-  <div style="width: 70%; position: absolute; left: 15%; top: 3%;">
-    <input type="range" min="0" max="120" value="120" class="slider" id="myRange"
-      oninput="change_year_label(); fetch_markers();">
-    <div style="width: 14em; position: relative;">
-      <div>
-        <p id="yearLabel"
-          style="margin: 10px 0px; color: white; text-align: left; padding: 0.2em 0.6em; font-size: 1.75em; border-left: 1px solid white; border-top: 1px solid white; border-top-left-radius: 6px;">
-          Jan 2020</p>
+  <body onload="initialize()">
+    <div id="earth_div" style="z-index: -1;"></div>
+    <div id="splash">
+      <h1 style="position: relative; top: 25%;">DataSphere</h1>
+      <h2 style="font-weight: normal; position: relative; top: 28%;">
+        &middot;&nbsp;&nbsp;A world full of history&nbsp;&middot;
+      </h2>
+      <h3 class="subtitle">
+        Explore 10,000+ recorded events
+      </h3>
+      <button id="start-btn" onclick="close_splash()">
+        >
+      </button>
+    </div>
+    <div class="slider-container">
+      <input
+        type="range"
+        min="0"
+        max="120"
+        value="120"
+        class="slider"
+        id="myRange"
+        oninput="change_year_label(); fetch_markers();"
+      />
+      <div style="width: 14em; position: relative;">
+        <div>
+          <p id="yearLabel">Jan 2020</p>
+        </div>
       </div>
     </div>
-  </div>
-  <div style="position: absolute; left: 15%; bottom: 3%;">
-    <label>
-      <input type="radio" name="data" value="news" checked="checked" onclick="handleDataChange(this);"><span>News</span>
-    </label>
-    <label>
-      <input type="radio" name="data" value="earthquakes" onclick="handleDataChange(this);"><span>Earthquakes</span>
-    </label>
-  </div>
-  <div id="info_panel"
-    style="opacity: 0; position: absolute; right: 1%; top: 15%;border-top: 1px solid white;border-right: 1px solid white;border-bottom:1px solid white;border-radius: 6px;">
-    <h2 id="info_title" style="margin:20px 20px 0px 20px;max-width: 12em;"></h2>
-    <p id="info_url"
-      style="font-style:italic;margin:6px 20px;max-width: 24em;overflow:hidden;white-space: nowrap;text-overflow: ellipsis;">
-    </p>
-    <hr style="margin:20px">
-    <p id="info_description" style="margin:20px;max-width: 24em;max-height:13.2em;overflow:hidden">
-    </p>
-    <img id="info_img" height="140" style="display:block; margin: 0 auto 20px auto">
-  </div>
-
-</body>
-
+    <div style="position: absolute; left: 15%; bottom: 3%;">
+      <label>
+        <input
+          type="radio"
+          name="data"
+          value="news"
+          checked="checked"
+          onclick="handleDataChange(this);"
+        /><span>News</span>
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="data"
+          value="earthquakes"
+          onclick="handleDataChange(this);"
+        /><span>Earthquakes</span>
+      </label>
+    </div>
+    <div id="info_panel" style="">
+      <h2
+        id="info_title"
+        style="margin: 20px 20px 0px 20px; max-width: 12em;"
+      ></h2>
+      <p
+        id="info_url"
+        style="
+          font-style: italic;
+          margin: 6px 20px;
+          max-width: 24em;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        "
+      ></p>
+      <hr style="margin: 20px;" />
+      <p
+        id="info_description"
+        style="
+          margin: 20px;
+          max-width: 24em;
+          max-height: 13.2em;
+          overflow: hidden;
+        "
+      ></p>
+      <img
+        id="info_img"
+        height="140"
+        style="display: block; margin: 0 auto 20px auto;"
+      />
+    </div>
+  </body>
 </html>
