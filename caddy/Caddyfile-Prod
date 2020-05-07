@@ -1,0 +1,6 @@
+api.datasphere.space
+
+encode zstd gzip
+
+reverse_proxy datasphere-backend:4000
+
