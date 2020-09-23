@@ -1,5 +1,8 @@
-## Pushing This Frontend to Github Pages
+# Frontend !
 
-`` git push origin `git subtree split --prefix frontend master`:gh-pages --force ``
+## Deployment
 
-`git subtree push --prefix frontend origin gh-pages`
+Deployment is now automatic via Github Pages
+
+Eventually this should turn into a more elegant page haha.
+
