@@ -15,7 +15,7 @@ function enableDebug() {
 function initialize() {
     const options = { atmosphere: true, center: [0, 0], zoom: 0 };
     earth = new WE.map('earth_div', options);
-    WE.tileLayer('https://tileserver.maptiler.com/nasa/{z}/{x}/{y}.jpg', {
+    WE.tileLayer('https://api.maptiler.com/maps/hybrid/{z}/{x}/{y}.jpg?key=FWcrNoYGPqodSQ4AlfyQ', {
         minZoom: 0,
         maxZoom: 5,
         attribution: 'NASA'
